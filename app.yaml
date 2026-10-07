@@ -1,0 +1,22 @@
+# gcloud app deploy --project perf360 --version 1
+runtime: go125
+
+env_variables:
+  PERF360_CREDENTIALS: gs://perf360/perf360-creds.json
+  PERF360_SECRETS: gs://perf360/perf360-secrets.txt
+  PERF360_USERS: gs://perf360/perf360-users.json
+  PERF360_PERIOD: 2025
+  PERF360_STATUS: closed
+  OAUTH2_CALLBACK: https://perf360.ausocean.org/oauth2callback
+
+handlers:
+  - url: /favicon\.ico
+    static_files: favicon.ico
+    upload: favicon\.ico
+
+  - url: /s
+    static_dir: s
+
+  - url: /.*
+    secure: always
+    script: auto

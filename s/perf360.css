@@ -1,0 +1,24 @@
+body { font-family: Ubuntu, sans-serif; }
+h1, img { display: inline-block; }
+footer { font-size: 80%; margin-top: 20px; }
+textarea { width: 100%; box-sizing: border-box; resize: vertical; wrap: soft; }
+.boxed { display: block; padding: 10px; border: 1px solid black; }
+.top-bar {
+  display: flex;
+  justify-content: space-between; /* Pushes brand left and actions right */
+  align-items: center;            /* Vertically centers all top elements */
+  margin-bottom: 1rem;
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand h1 { margin: 0; }
+.actions { text-align: right; }
+@media print {
+  /* Hide elements not needed when printing */
+  button, select, form { display: none !important; }
+  .actions { display: none !important; }
+  /* Allow textareas to expand fully to fit all text */
+  textarea { display: block !important; height: auto !important; overflow: hidden !important;
+	     field-sizing: content !important; white-space: pre-wrap !important; border: 1px solid #ccc !important; }
+  /* Ensure boxes don't awkwardly split across page breaks */
+  .boxed { page-break-inside: avoid; break-inside: avoid; margin-bottom: 1rem; }
+}

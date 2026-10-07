@@ -1,0 +1,6 @@
+indexes:
+
+- kind: Review
+  properties:
+  - name: Period
+  - name: Peer

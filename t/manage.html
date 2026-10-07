@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu">
+  <link href="/s/perf360.css" rel="stylesheet" type="text/css"/>
+  <title>Perf360 for Managers</title>
+</head>
+<body>
+  <header class="top-bar">
+    <div class="brand">
+      <img src="/s/360.png" alt="Perf360 Logo">
+      <h1>For Managers</h1>
+    </div>
+    {{if .Profile}}
+    <div class="actions">
+      <a href="/">Peer Review</a>
+      <a href="{{.LogoutURL}}">Log out</a>
+    </div>
+    {{end}}
+  </header>
+
+  {{if .Profile}}
+  <p>User: {{.Profile.GivenName}}</p>
+  <p>Period: {{.Period}}</p>
+  <p>Status: {{.Status}}</p>
+
+    <h2>Select team member</h2>
+    <form action="/manage" method="post">
+      <select name="member" onchange="this.form.submit();">
+        <option value="">-- Select team member --</option>
+        {{range $user := .Users}}
+        <option value="{{ $user.Name }}"{{if eq $.Member $user.Name}} selected{{end}}>{{ $user.Name }}</option>
+        {{end}}
+      </select>
+    </form>
+
+    {{if .Reviews }}
+    <h2>Feedback for {{.Member}}</h2>
+      {{range $review := .Reviews}}
+      <div class="boxed"> 
+        {{$review.Name}} says:<br>
+        <textarea rows="15" readonly>{{$review.Feedback}}</textarea><br>
+        <em>Last updated: {{$review.Updated}}</em><br>
+      </div>
+      {{end}}
+    {{end}}
+
+  {{else}}
+    <div><a href="{{.LoginURL}}">Log in</a></div>
+  {{end}}
+  {{.Footer}}
+</body>
+</html>
